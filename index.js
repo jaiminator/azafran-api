@@ -5,6 +5,7 @@ const cors = require('cors');
 const recipesRoutes = require("./routes/recipes.routes");
 const ingredientsRoutes = require("./routes/ingredients.routes");
 const usersRoutes = require("./routes/users.routes");
+const { dbConnection } = require('./db');
 
 const main = () => {
     const app = express();
@@ -12,8 +13,10 @@ const main = () => {
     app.use(express.json());
 
     app.use("/recipes", recipesRoutes);
-    app.use("/recipes", ingredientsRoutes);
+    app.use("/ingredients", ingredientsRoutes);
     app.use("/users", usersRoutes);
+
+    dbConnection();
 
     app.listen(port, () => {
         console.log(`App listening on ${port}`);
