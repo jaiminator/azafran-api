@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const ingredientSchema = new Schema ({
     name: { type: String, required: true },
-    userId: String,
+    userId: { type: String, required: true},
     quantity: { type: Number, default: 1 },
     unit: String,
     createdAt: { type: Date, default: Date.now }
