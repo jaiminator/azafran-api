@@ -48,7 +48,9 @@ const deleteIngredient = async (req, res) => {
     }
 }
 
-exports.createIngredient = createIngredient;
+module.exports = { createIngredient, getIngredients, updateIngredient, deleteIngredient};
+
+/* exports.createIngredient = createIngredient;
 exports.getIngredients = getIngredients;
 exports.updateIngredient = updateIngredient;
-exports.deleteIngredient = deleteIngredient;
+exports.deleteIngredient = deleteIngredient; */
