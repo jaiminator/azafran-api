@@ -25,7 +25,7 @@ const login = async (req, res) => {
         //Comprueba si el password del usuario sea el mismo que el recibido en el body
         const isPasswordMatch = bcryptjs.compareSync(password, user.password);
         if (!isPasswordMatch) {
-            res.status(404).send("INVALID_CREDENTIALS");
+            res.status(404).send({msg: "INVALID_CREDENTIALS"});
             return;
         }
 
