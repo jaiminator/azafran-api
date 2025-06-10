@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
 
     // Si no hay token: 401
     if(!token) {
-        res.status(401).send("Missing auth header");
+        res.status(401).send({msg: "Missing auth header"});
         return;
     }
     // Verificar token con JWT secret
@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
     try {
         payload = jwt.verify(token, JWT_SECRET);
     } catch (error) {
-        res.status(401).send("Invalid auth header");
+        res.status(401).send({msg: "Invalid auth header"});
     }
     // Obtener el userId del payload
     const userId = payload.userId;
@@ -24,7 +24,7 @@ const authMiddleware = async (req, res, next) => {
     // Prevenir edge case: find de ese user by userId
     const user = await User.findById(userId);
     if (!user) {
-        res.status(401).send("Invalid user"); //EDGE CASE
+        res.status(401).send({msg: "Invalid user"}); //EDGE CASE
     }
     // Guardar user en la request
     // para recogerlo en los controllers
