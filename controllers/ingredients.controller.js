@@ -16,7 +16,7 @@ const getIngredients = async (req, res) => {
     //Obtener todos ingredientes de un usuario
     //[{}]
     try {
-        const listIngredients = await Ingredient.find();
+        const listIngredients = await Ingredient.find({userId: req.user.id});
         res.status(200).send(listIngredients);
     } catch (error) {
         res.status(500).send("Error to get ingredients");
