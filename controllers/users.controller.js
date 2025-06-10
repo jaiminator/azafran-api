@@ -18,7 +18,7 @@ const login = async (req, res) => {
 
         //Validar que el usuario exista
         if (!user) {
-            res.status(404).send("INVALID_CREDENTIALS");
+            res.status(404).send({msg: "INVALID_CREDENTIALS"});
             return;
         }
 
