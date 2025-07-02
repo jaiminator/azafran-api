@@ -1,4 +1,5 @@
 const { Ingredient } = require("../models/ingredient");
+const { sendMessage } = require("../services/openai");
 
 const getRecipes = async (req, res) => {
 
@@ -16,18 +17,10 @@ const getRecipes = async (req, res) => {
             ingredients = [ingredients];
         }
 
-        console.log(ingredients);
         const ingredientDocs = await Ingredient.find(({_id: { $in: ingredients } }));
         const ingredientNames = ingredientDocs.map((ing) => ing.name);
         
-        const generatedRecipes = [
-            {
-                id: 2,
-                title: "Paella",
-                description: "Arroz con cosas",
-                ingredients: JSON.stringify(ingredientNames)
-            }
-        ]
+        const generatedRecipes = await sendMessage(ingredientNames);
         res.send({recipes: generatedRecipes});
     } catch (error){
         res.status(500).send("Error. Recipe not created");
